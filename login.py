@@ -15,7 +15,7 @@ def main(password1, password2=None, password3=None):
 		x["p"] -= 1
 		with open('.h.json', 'w') as v:
 			json.dump(x, v, indent=4)
-		return 0
+		return False
 	else:
 		entry = input("Please enter the password: ")
 		if entry in pw:
@@ -25,13 +25,13 @@ def main(password1, password2=None, password3=None):
 			with open(".h.json", "w") as v:
 				json.dump(x, v, indent=4)
 			print("Password accepted")
-			return 1
+			return True
 		else:
 			with open('.h.json', 'r') as v:
 				x = json.load(v)
 			if x["p"] > 5:
 				print("Too many invalid attempts reached!")
-				return 0
+				return True
 			else:
 				x["p"] += 1
 				with open('.h.json', 'w') as v:
