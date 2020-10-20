@@ -1,5 +1,4 @@
 import json
-import sys
 
 def main():
 	with open('.h.json', 'r') as v:
@@ -11,6 +10,7 @@ def main():
 		x["p"] -= 1
 		with open('.h.json', 'w') as v:
 			json.dump(x, v, indent=4)
+		return 0
 	else:
 		with open('p.json', 'r') as v:
 			x = json.load(v)
@@ -18,12 +18,13 @@ def main():
 		entry = input("Please enter the password: ")
 		if entry in passwords:
 			print("Password accepted")
+			return 1
 		else:
 			with open('.h.json', 'r') as v:
 				x = json.load(v)
 			if x["p"] > 5:
 				print("Too many invalid attempts reached!")
-				sys.exit()
+				return 0
 			else:
 				x["p"] += 1
 				with open('.h.json', 'w') as v:
