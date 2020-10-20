@@ -1,11 +1,11 @@
-from login import main
+from login import basic
 
 class c:
 	w = '\033[91m'
 	g = '\033[92m'
 	e = '\033[0m'
 
-maint = main("test")
+maint = basic("test")
 
 if maint == False:
 	print(f"{c.w}ACCESS DENIED{c.e}")
