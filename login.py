@@ -1,6 +1,11 @@
 import json
 
-def main():
+def main(password1, password2=None, password3=None):
+	pw = [password1]
+	if password2 is not None:
+		pw.append(password2)
+	if password3 is not None:
+		pw.append(password3)
 	with open('.h.json', 'r') as v:
 		x = json.load(v)
 	if x["p"] > 2:
@@ -12,11 +17,13 @@ def main():
 			json.dump(x, v, indent=4)
 		return 0
 	else:
-		with open('p.json', 'r') as v:
-			x = json.load(v)
-		passwords = x
 		entry = input("Please enter the password: ")
-		if entry in passwords:
+		if entry in pw:
+			with open(".h.json", "r") as v:
+				x = json.load(v)
+			x["p"] = 0
+			with open(".h.json", "w") as v:
+				json.dump(x, v, indent=4)
 			print("Password accepted")
 			return 1
 		else:
@@ -30,5 +37,4 @@ def main():
 				with open('.h.json', 'w') as v:
 					json.dump(x, v, indent=4)
 				print("Incorrect Password!")
-				main()
-main()
+				main(password1, password2, password3)
